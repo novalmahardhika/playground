@@ -39,4 +39,12 @@ It acts as a **central playground** for learning, improving, and reusing best pr
 
 ---
 
-## 🧩 Project Structure
+## 📦 Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/your-username/playground.git
+cd playground
+npm install
+```
