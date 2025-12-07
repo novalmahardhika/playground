@@ -24,8 +24,8 @@ export function Sidebar({ className }: SidebarProps) {
       title: 'Components',
       items: [
         {
-          title: 'All Components',
-          href: '/docs/components',
+          title: 'Buttons',
+          href: '/docs/components/button',
         },
       ],
     },
