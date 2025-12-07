@@ -170,7 +170,7 @@ const features = [
       'A library of reusable, accessible, and styled React components.',
     icon: Layers,
     color: 'bg-primary',
-    href: '/docs/components',
+    href: '/docs/components/button',
     example: (
       <Button size='sm' className='pointer-events-none'>
         Click Me
