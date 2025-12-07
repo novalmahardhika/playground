@@ -232,8 +232,8 @@ const features = [
     ),
   },
   {
-    title: 'Full Calendar',
-    description: 'A robust monthly calendar view with event management.',
+    title: 'Block Components',
+    description: 'A collection of reusable UI components.',
     icon: Calendar,
     color: 'bg-emerald-400',
     href: '/docs/blocks/full-calendar',
