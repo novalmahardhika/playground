@@ -1222,3 +1222,459 @@ export const outlineFillButtonCode = `export function OutlineFillButton() {
     </button>
   )
 }`
+
+// =================================================================================================
+// 25. Gradient Rotate Border
+// =================================================================================================
+export function GradientRotateButton() {
+  return (
+    <button className='relative inline-flex h-10 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50'>
+      <span className='absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]' />
+      <span className='inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-8 py-2 text-sm font-medium text-white backdrop-blur-3xl'>
+        Gradient Ring
+      </span>
+    </button>
+  )
+}
+export const gradientRotateButtonCode = `export function GradientRotateButton() {
+  return (
+    <button className="relative inline-flex h-10 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+      <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+      <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-8 py-2 text-sm font-medium text-white backdrop-blur-3xl">
+        Gradient Ring
+      </span>
+    </button>
+  )
+}`
+
+// =================================================================================================
+// 26. Galaxy Button
+// =================================================================================================
+export function GalaxyButton() {
+  return (
+    <button
+      className={cn(
+        commonStyles,
+        'relative overflow-hidden rounded-md bg-slate-950 px-8 text-white transition-colors hover:bg-slate-900',
+      )}
+    >
+      <div className='absolute inset-0 z-0 flex bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] animate-[spin_60s_linear_infinite]' />
+      <span className='relative z-10 block rounded-md bg-neutral-950/50 px-4 py-1'>
+        Galaxy
+      </span>
+    </button>
+  )
+}
+export const galaxyButtonCode = `export function GalaxyButton() {
+  return (
+    <button className="relative inline-flex items-center justify-center h-10 px-8 text-sm font-medium text-white transition-colors overflow-hidden rounded-md bg-slate-950 hover:bg-slate-900">
+      <div className="absolute inset-0 z-0 flex bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] animate-[spin_60s_linear_infinite]" />
+      <span className="relative z-10 block rounded-md bg-neutral-950/50 px-4 py-1">
+        Galaxy
+      </span>
+    </button>
+  )
+}`
+
+// =================================================================================================
+// 27. Pulse Ring
+// =================================================================================================
+export function PulseButton() {
+  return (
+    <button
+      className={cn(
+        commonStyles,
+        'relative rounded-full bg-blue-500 text-white',
+      )}
+    >
+      <span className='absolute -inset-1 z-[-1] animate-ping rounded-full bg-blue-500 opacity-75' />
+      <span>Pulse Alert</span>
+    </button>
+  )
+}
+export const pulseButtonCode = `export function PulseButton() {
+  return (
+    <button className="relative inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-full">
+      <span className="absolute -inset-1 z-[-1] animate-ping rounded-full bg-blue-500 opacity-75" />
+      <span>Pulse Alert</span>
+    </button>
+  )
+}`
+
+// =================================================================================================
+// 28. Shake Error
+// =================================================================================================
+export function ShakeButton() {
+  const [shaking, setShaking] = useState(false)
+
+  const handleClick = () => {
+    setShaking(true)
+    setTimeout(() => setShaking(false), 500)
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      className={cn(
+        commonStyles,
+        'bg-red-500 text-white hover:bg-red-600',
+        shaking && 'animate-[shake_0.5s_ease-in-out]',
+      )}
+    >
+      Error Shake
+      <style jsx>{`
+        @keyframes shake {
+          0%,
+          100% {
+            transform: translateX(0);
+          }
+          25% {
+            transform: translateX(-5px);
+          }
+          75% {
+            transform: translateX(5px);
+          }
+        }
+      `}</style>
+    </button>
+  )
+}
+export const shakeButtonCode = `import { useState } from "react"
+
+export function ShakeButton() {
+  const [shaking, setShaking] = useState(false)
+
+  const handleClick = () => {
+    setShaking(true)
+    setTimeout(() => setShaking(false), 500)
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      className={\`inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white transition-colors bg-red-500 rounded-md hover:bg-red-600 \${
+        shaking ? "animate-[shake_0.5s_ease-in-out]" : ""
+      }\`}
+    >
+      Error Shake
+      <style jsx>{\`
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-5px); }
+          75% { transform: translateX(5px); }
+        }
+      \`}</style>
+    </button>
+  )
+}`
+
+// =================================================================================================
+// 29. Party Confetti
+// =================================================================================================
+export function PartyButton() {
+  const [isPartying, setIsPartying] = useState(false)
+
+  const handleClick = () => {
+    setIsPartying(true)
+    setTimeout(() => setIsPartying(false), 1000)
+  }
+
+  return (
+    <div className='relative'>
+      <button
+        onClick={handleClick}
+        className={cn(
+          commonStyles,
+          'bg-gradient-to-r from-pink-500 to-violet-500 text-white shadow-md active:scale-95 transition-transform',
+        )}
+      >
+        <span className='flex items-center gap-2'>
+          Click Me <Sparkles className='size-4' />
+        </span>
+      </button>
+      <AnimatePresence>
+        {isPartying && (
+          <span className='absolute inset-0 -z-10 block pointer-events-none'>
+            {[...Array(20)].map((_, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 1, scale: 0, x: 0, y: 0 }}
+                animate={{
+                  opacity: 0,
+                  scale: 1,
+                  x: (Math.random() - 0.5) * 100,
+                  y: (Math.random() - 1) * 100,
+                  rotate: Math.random() * 360,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className='absolute top-1/2 left-1/2 h-2 w-2 rounded-full'
+                style={{
+                  backgroundColor: [
+                    '#ff0000',
+                    '#00ff00',
+                    '#0000ff',
+                    '#ffff00',
+                    '#ff00ff',
+                    '#00ffff',
+                  ][Math.floor(Math.random() * 6)],
+                }}
+              />
+            ))}
+          </span>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+export const partyButtonCode = `import { useState } from "react"
+import { motion, AnimatePresence } from "motion/react"
+import { Sparkles } from "lucide-react"
+
+export function PartyButton() {
+  const [isPartying, setIsPartying] = useState(false)
+
+  const handleClick = () => {
+    setIsPartying(true)
+    setTimeout(() => setIsPartying(false), 1000)
+  }
+
+  return (
+    <div className="relative inline-block">
+      <button
+        onClick={handleClick}
+        className="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white transition-transform shadow-md rounded-md bg-gradient-to-r from-pink-500 to-violet-500 active:scale-95"
+      >
+        <span className="flex items-center gap-2">
+            Click Me <Sparkles className="size-4" />
+        </span>
+      </button>
+      <AnimatePresence>
+        {isPartying && (
+          <span className="absolute inset-0 -z-10 block pointer-events-none">
+            {[...Array(20)].map((_, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 1, scale: 0, x: 0, y: 0 }}
+                animate={{
+                  opacity: 0,
+                  scale: 1,
+                  x: (Math.random() - 0.5) * 100,
+                  y: (Math.random() - 1) * 100,
+                  rotate: Math.random() * 360,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="absolute top-1/2 left-1/2 h-2 w-2 rounded-full"
+                style={{
+                  backgroundColor: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff"][Math.floor(Math.random() * 6)]
+                }}
+              />
+            ))}
+          </span>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}`
+
+// =================================================================================================
+// 30. AI Genius Button
+// =================================================================================================
+export function AiButton() {
+  return (
+    <button
+      className={cn(
+        commonStyles,
+        'relative overflow-hidden rounded-full bg-slate-950 px-8 text-white transition-all hover:bg-slate-900 hover:shadow-lg hover:shadow-indigo-500/20',
+      )}
+    >
+      <div className='absolute inset-0 z-0 opacity-20'>
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{
+              opacity: [0, 1, 0],
+              scale: [0, 1.5, 0],
+              x: Math.random() * 100,
+              y: Math.random() * 40,
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+            className='absolute h-1 w-1 rounded-full bg-indigo-400'
+            style={{
+              top: Math.random() * 100 + '%',
+              left: Math.random() * 100 + '%',
+            }}
+          />
+        ))}
+      </div>
+      <span className='relative z-10 flex items-center gap-2 font-semibold text-indigo-200'>
+        <Sparkles className='size-4 text-indigo-400' />
+        Generate with AI
+      </span>
+    </button>
+  )
+}
+export const aiButtonCode = `import { motion } from "motion/react"
+import { Sparkles } from "lucide-react"
+
+export function AiButton() {
+  return (
+    <button className="relative inline-flex items-center justify-center h-10 px-8 text-sm font-medium text-white transition-all overflow-hidden rounded-full bg-slate-950 hover:bg-slate-900 hover:shadow-lg hover:shadow-indigo-500/20">
+      <div className="absolute inset-0 z-0 opacity-20">
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{
+              opacity: [0, 1, 0],
+              scale: [0, 1.5, 0],
+              x: Math.random() * 100,
+              y: Math.random() * 40,
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+            className="absolute h-1 w-1 rounded-full bg-indigo-400"
+            style={{
+              top: Math.random() * 100 + "%",
+              left: Math.random() * 100 + "%",
+            }}
+          />
+        ))}
+      </div>
+      <span className="relative z-10 flex items-center gap-2 font-semibold text-indigo-200">
+        <Sparkles className="size-4 text-indigo-400" />
+        Generate with AI
+      </span>
+    </button>
+  )
+}`
+
+// =================================================================================================
+// 31. Brutalist 3D
+// =================================================================================================
+export function BrutalistButton() {
+  return (
+    <button
+      className={cn(
+        commonStyles,
+        'border-2 border-slate-900 bg-yellow-400 text-slate-900 font-bold uppercase shadow-[4px_4px_0_0_#0f172a] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_#0f172a] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none',
+      )}
+    >
+      Brutalist
+    </button>
+  )
+}
+export const brutalistButtonCode = `export function BrutalistButton() {
+  return (
+    <button className="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-bold text-slate-900 uppercase transition-all bg-yellow-400 border-2 border-slate-900 shadow-[4px_4px_0_0_#0f172a] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_#0f172a] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none">
+      Brutalist
+    </button>
+  )
+}`
+
+// =================================================================================================
+// 32. Glass Morphic
+// =================================================================================================
+export function GlassButton() {
+  return (
+    <div className='relative overflow-hidden rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 p-[1px]'>
+      <button className='relative inline-flex h-full w-full items-center justify-center rounded-lg bg-black/40 px-6 py-2 text-sm font-medium text-white backdrop-blur-md transition-colors hover:bg-black/30'>
+        Glass Link
+      </button>
+    </div>
+  )
+}
+export const glassButtonCode = `export function GlassButton() {
+  return (
+    <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 p-[1px]">
+       <button className="relative inline-flex h-full w-full items-center justify-center rounded-lg bg-black/40 px-6 py-2 text-sm font-medium text-white backdrop-blur-md transition-colors hover:bg-black/30">
+        Glass Link
+      </button>
+    </div>
+  )
+}`
+
+// =================================================================================================
+// 33. Magnetic Text
+// =================================================================================================
+export function MagneticTextButton() {
+  const ref = useRef<HTMLButtonElement>(null)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e
+    const { left, top, width, height } = ref.current!.getBoundingClientRect()
+    const x = (clientX - (left + width / 2)) * 0.5
+    const y = (clientY - (top + height / 2)) * 0.5
+    setPosition({ x, y })
+  }
+
+  const handleMouseLeave = () => {
+    setPosition({ x: 0, y: 0 })
+  }
+
+  return (
+    <button
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={cn(
+        commonStyles,
+        'relative overflow-hidden border border-slate-200 bg-white text-slate-900 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100',
+      )}
+    >
+      <motion.span
+        animate={{ x: position.x, y: position.y }}
+        transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
+        className='inline-block'
+      >
+        Magnetic Text
+      </motion.span>
+    </button>
+  )
+}
+export const magneticTextButtonCode = `import { useRef, useState } from "react"
+import { motion } from "motion/react"
+
+export function MagneticTextButton() {
+  const ref = useRef<HTMLButtonElement>(null)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e
+    const { left, top, width, height } = ref.current!.getBoundingClientRect()
+    const x = (clientX - (left + width / 2)) * 0.5
+    const y = (clientY - (top + height / 2)) * 0.5
+    setPosition({ x, y })
+  }
+
+  const handleMouseLeave = () => {
+    setPosition({ x: 0, y: 0 })
+  }
+
+  return (
+    <button
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium transition-colors bg-white border rounded-md border-slate-200 text-slate-900 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+    >
+      <motion.span
+        animate={{ x: position.x, y: position.y }}
+        transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+        className="inline-block"
+      >
+        Magnetic Text
+      </motion.span>
+    </button>
+  )
+}`

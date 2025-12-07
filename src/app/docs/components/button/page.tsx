@@ -58,6 +58,24 @@ import {
   swipeButtonCode,
   UnlockButton,
   unlockButtonCode,
+  GradientRotateButton,
+  gradientRotateButtonCode,
+  GalaxyButton,
+  galaxyButtonCode,
+  PulseButton,
+  pulseButtonCode,
+  ShakeButton,
+  shakeButtonCode,
+  PartyButton,
+  partyButtonCode,
+  AiButton,
+  aiButtonCode,
+  BrutalistButton,
+  brutalistButtonCode,
+  GlassButton,
+  glassButtonCode,
+  MagneticTextButton,
+  magneticTextButtonCode,
 } from '../../../../components/components/button-demos'
 
 export default function ButtonsPage() {
@@ -119,6 +137,21 @@ export default function ButtonsPage() {
               component={<GooeyButton />}
               tsCode={gooeyButtonCode}
             />
+            <ComponentPreview
+              title='Gradient Ring'
+              component={<GradientRotateButton />}
+              tsCode={gradientRotateButtonCode}
+            />
+            <ComponentPreview
+              title='Galaxy'
+              component={<GalaxyButton />}
+              tsCode={galaxyButtonCode}
+            />
+            <ComponentPreview
+              title='Pulse'
+              component={<PulseButton />}
+              tsCode={pulseButtonCode}
+            />
           </div>
         </div>
 
@@ -134,9 +167,24 @@ export default function ButtonsPage() {
               tsCode={push3DButtonCode}
             />
             <ComponentPreview
+              title='AI Genius'
+              component={<AiButton />}
+              tsCode={aiButtonCode}
+            />
+            <ComponentPreview
               title='Neumorphic'
               component={<NeumorphicButton />}
               tsCode={neumorphicButtonCode}
+            />
+            <ComponentPreview
+              title='Brutalist 3D'
+              component={<BrutalistButton />}
+              tsCode={brutalistButtonCode}
+            />
+            <ComponentPreview
+              title='Glass Morphic'
+              component={<GlassButton />}
+              tsCode={glassButtonCode}
             />
             <ComponentPreview
               title='Pixel Art'
@@ -183,6 +231,11 @@ export default function ButtonsPage() {
               tsCode={skewButtonCode}
             />
             <ComponentPreview
+              title='Magnetic Text'
+              component={<MagneticTextButton />}
+              tsCode={magneticTextButtonCode}
+            />
+            <ComponentPreview
               title='Ripple'
               component={<RippleButton />}
               tsCode={rippleButtonCode}
@@ -191,6 +244,11 @@ export default function ButtonsPage() {
               title='Interactive FAB'
               component={<FAB />}
               tsCode={fabCode}
+            />
+            <ComponentPreview
+              title='Party Confetti'
+              component={<PartyButton />}
+              tsCode={partyButtonCode}
             />
           </div>
         </div>
@@ -245,6 +303,11 @@ export default function ButtonsPage() {
               title='Notification Bell'
               component={<NotificationButton />}
               tsCode={notificationButtonCode}
+            />
+            <ComponentPreview
+              title='Error Shake'
+              component={<ShakeButton />}
+              tsCode={shakeButtonCode}
             />
           </div>
         </div>
