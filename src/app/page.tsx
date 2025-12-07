@@ -10,7 +10,14 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { motion } from 'motion/react'
-import { ArrowRight, FlaskConical, Layers, Layout, Zap } from 'lucide-react'
+import {
+  ArrowRight,
+  Calendar,
+  FlaskConical,
+  Layers,
+  Layout,
+  Zap,
+} from 'lucide-react'
 import { ModeToggle } from '@/components/mode-toggle'
 import Link from 'next/link'
 
@@ -221,6 +228,27 @@ const features = [
           transition={{ duration: 1.8, repeat: Infinity }}
           className='w-2 bg-chart-4 border border-border'
         />
+      </div>
+    ),
+  },
+  {
+    title: 'Full Calendar',
+    description: 'A robust monthly calendar view with event management.',
+    icon: Calendar,
+    color: 'bg-emerald-400',
+    href: '/docs/blocks/full-calendar',
+    example: (
+      <div className='w-full max-w-[100px] border border-border bg-background p-1'>
+        <div className='grid grid-cols-7 gap-0.5'>
+          {Array.from({ length: 14 }).map((_, i) => (
+            <div
+              key={i}
+              className={`aspect-square w-full rounded-[1px] ${
+                i === 5 ? 'bg-primary' : 'bg-muted'
+              }`}
+            />
+          ))}
+        </div>
       </div>
     ),
   },

@@ -1,8 +1,10 @@
 'use client'
 
 import { ComponentPreview } from '@/components/component-preview'
+import { GridLayout } from '@/components/layouts/grid-layout'
+import { FlexLayout } from '@/components/layouts/flex-layout'
 
-const gridTsCode = `export function GridLayout() {
+const gridCode = `export function GridLayout() {
   return (
     <div className="grid grid-cols-3 gap-4 p-4 border-2 border-border rounded-lg bg-muted w-full max-w-md">
       <div className="h-20 bg-primary border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]" />
@@ -14,29 +16,7 @@ const gridTsCode = `export function GridLayout() {
   )
 }`
 
-const gridJsCode = `export function GridLayout() {
-  return (
-    <div className="grid grid-cols-3 gap-4 p-4 border-2 border-border rounded-lg bg-muted w-full max-w-md">
-      <div className="h-20 bg-primary border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]" />
-      <div className="h-20 bg-secondary border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]" />
-      <div className="h-20 bg-accent border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]" />
-      <div className="col-span-2 h-20 bg-chart-4 border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]" />
-      <div className="h-20 bg-chart-5 border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]" />
-    </div>
-  )
-}`
-
-const flexTsCode = `export function FlexLayout() {
-  return (
-    <div className="flex flex-wrap gap-4 p-4 border-2 border-border rounded-lg bg-muted w-full max-w-md">
-      <div className="flex-1 min-w-[100px] h-20 bg-primary border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]" />
-      <div className="flex-[2] min-w-[150px] h-20 bg-secondary border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]" />
-      <div className="flex-1 min-w-[100px] h-20 bg-accent border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]" />
-    </div>
-  )
-}`
-
-const flexJsCode = `export function FlexLayout() {
+const flexCode = `export function FlexLayout() {
   return (
     <div className="flex flex-wrap gap-4 p-4 border-2 border-border rounded-lg bg-muted w-full max-w-md">
       <div className="flex-1 min-w-[100px] h-20 bg-primary border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]" />
@@ -64,17 +44,8 @@ export default function LayoutsPage() {
           </h2>
           <ComponentPreview
             title='Grid Layout'
-            component={
-              <div className='grid grid-cols-3 gap-4 p-4 border-2 border-border rounded-lg bg-muted w-full max-w-md'>
-                <div className='h-20 bg-primary border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]' />
-                <div className='h-20 bg-secondary border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]' />
-                <div className='h-20 bg-accent border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]' />
-                <div className='col-span-2 h-20 bg-chart-4 border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]' />
-                <div className='h-20 bg-chart-5 border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]' />
-              </div>
-            }
-            tsCode={gridTsCode}
-            jsCode={gridJsCode}
+            component={<GridLayout />}
+            tsCode={gridCode}
           />
         </div>
         <div className='space-y-4'>
@@ -83,15 +54,8 @@ export default function LayoutsPage() {
           </h2>
           <ComponentPreview
             title='Flex Layout'
-            component={
-              <div className='flex flex-wrap gap-4 p-4 border-2 border-border rounded-lg bg-muted w-full max-w-md'>
-                <div className='flex-1 min-w-[100px] h-20 bg-primary border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]' />
-                <div className='flex-[2] min-w-[150px] h-20 bg-secondary border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]' />
-                <div className='flex-1 min-w-[100px] h-20 bg-accent border-2 border-border rounded shadow-[2px_2px_0px_0px_var(--color-border)]' />
-              </div>
-            }
-            tsCode={flexTsCode}
-            jsCode={flexJsCode}
+            component={<FlexLayout />}
+            tsCode={flexCode}
           />
         </div>
       </div>

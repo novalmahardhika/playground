@@ -48,6 +48,15 @@ export function Sidebar({ className }: SidebarProps) {
       ],
     },
     {
+      title: 'Blocks',
+      items: [
+        {
+          title: 'Full Calendar',
+          href: '/docs/blocks/full-calendar',
+        },
+      ],
+    },
+    {
       title: 'Experiments',
       items: [
         {

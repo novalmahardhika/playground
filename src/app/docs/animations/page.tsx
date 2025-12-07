@@ -1,21 +1,12 @@
 'use client'
 
 import { ComponentPreview } from '@/components/component-preview'
-import { motion } from 'motion/react'
+import { RotateAnimation } from '@/components/animations/rotate-animation'
+import { BounceAnimation } from '@/components/animations/bounce-animation'
 
-const rotateTsCode = `import { motion } from "motion/react"
+const rotateCode = `"use client"
 
-export function RotateAnimation() {
-  return (
-    <motion.div
-      animate={{ rotate: 360 }}
-      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-      className="w-24 h-24 bg-primary border-2 border-border rounded-lg shadow-[4px_4px_0px_0px_var(--color-border)]"
-    />
-  )
-}`
-
-const rotateJsCode = `import { motion } from "motion/react"
+import { motion } from "motion/react"
 
 export function RotateAnimation() {
   return (
@@ -27,19 +18,9 @@ export function RotateAnimation() {
   )
 }`
 
-const bounceTsCode = `import { motion } from "motion/react"
+const bounceCode = `"use client"
 
-export function BounceAnimation() {
-  return (
-    <motion.div
-      animate={{ y: [-20, 0, -20] }}
-      transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-      className="w-24 h-24 bg-secondary border-2 border-border rounded-full shadow-[4px_4px_0px_0px_var(--color-border)]"
-    />
-  )
-}`
-
-const bounceJsCode = `import { motion } from "motion/react"
+import { motion } from "motion/react"
 
 export function BounceAnimation() {
   return (
@@ -70,31 +51,13 @@ export default function AnimationsPage() {
           <div className='grid gap-8'>
             <ComponentPreview
               title='Rotate Animation'
-              component={
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                  className='w-24 h-24 bg-primary border-2 border-border rounded-lg shadow-[4px_4px_0px_0px_var(--color-border)]'
-                />
-              }
-              tsCode={rotateTsCode}
-              jsCode={rotateJsCode}
+              component={<RotateAnimation />}
+              tsCode={rotateCode}
             />
             <ComponentPreview
               title='Bounce Animation'
-              component={
-                <motion.div
-                  animate={{ y: [-20, 0, -20] }}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  className='w-24 h-24 bg-secondary border-2 border-border rounded-full shadow-[4px_4px_0px_0px_var(--color-border)]'
-                />
-              }
-              tsCode={bounceTsCode}
-              jsCode={bounceJsCode}
+              component={<BounceAnimation />}
+              tsCode={bounceCode}
             />
           </div>
         </div>
