@@ -27,6 +27,10 @@ export function Sidebar({ className }: SidebarProps) {
           title: 'Buttons',
           href: '/docs/components/button',
         },
+        {
+          title: 'Inputs',
+          href: '/docs/components/input',
+        },
       ],
     },
     {
