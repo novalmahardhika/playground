@@ -31,7 +31,7 @@ export default function Page() {
       <ComponentPreview
         title='Interactive Calendar'
         component={
-          <div className='h-[750px] w-full border rounded-xl overflow-hidden shadow-sm bg-background'>
+          <div className='h-[750px] w-full border rounded-xl overflow-hidden shadow-sm bg-background p-6'>
             <FullCalendarRoot events={mockEvents} />
           </div>
         }
