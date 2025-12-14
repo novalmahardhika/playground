@@ -122,3 +122,51 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* === REMOVE TODAY BACKGROUND (ALL VIEWS) === */
+.calendar-wrapper .fc-day-today {
+  background: transparent !important;
+}
+
+/* dayGrid (month) */
+.calendar-wrapper .fc-daygrid-day.fc-day-today {
+  background: transparent !important;
+}
+
+/* timeGrid (week/day) */
+.calendar-wrapper .fc-timegrid-col.fc-day-today {
+  background: transparent !important;
+}
+
+/* ===== UNIFY EVENT CONTAINER ===== */
+.calendar-wrapper .fc-daygrid-event,
+.calendar-wrapper .fc-timegrid-event {
+  border-radius: 12px;
+  padding: 0 !important;
+}
+
+/* paksa eventContent jadi full control */
+.calendar-wrapper .fc-event-main {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+/* hilangkan style bawaan */
+.calendar-wrapper .fc-event {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* .calendar-wrapper .fc-daygrid-day.fc-day-today::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 10px;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  pointer-events: none;
+}
+
+.calendar-wrapper .fc-timegrid-col.fc-day-today {
+  background-color: rgba(59, 130, 246, 0.08);
+} */

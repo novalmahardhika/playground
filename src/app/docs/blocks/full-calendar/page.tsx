@@ -1,60 +1,18 @@
 import { ComponentPreview } from '@/components/component-preview'
-import type { CalendarEvent } from '@/lib/types/full-calendar.type'
 import { CodeBlock } from '@/components/code-block'
-import { FullCalendar } from '@/components/blocks/full-calendar/full-calendar'
+import { FullCalendarRoot } from '@/components/blocks/full-calendar/full-calendar'
+import { mockEvents } from '@/lib/mocks/full-calendar-mock-event'
 
 export default function CalendarPage() {
-  const events: CalendarEvent[] = [
-    {
-      id: '1',
-      title: 'Team Meeting',
-      start: new Date(new Date().setHours(10, 0, 0, 0)),
-      end: new Date(new Date().setHours(11, 0, 0, 0)),
-      description: 'Weekly sync with the team',
-      color: '#3b82f6',
-    },
-    {
-      id: '2',
-      title: 'Lunch with Client',
-      start: new Date(new Date().setHours(12, 30, 0, 0)),
-      end: new Date(new Date().setHours(13, 30, 0, 0)),
-      color: '#f59e0b',
-    },
-    {
-      id: '3',
-      title: 'Project Deadline',
-      start: new Date(new Date().setDate(new Date().getDate() + 3)),
-      end: new Date(new Date().setDate(new Date().getDate() + 3)),
-      color: '#ef4444',
-    },
-    {
-      id: '4',
-      title: 'Code Review',
-      start: new Date(new Date().setDate(new Date().getDate() + 5)),
-      end: new Date(new Date().setDate(new Date().getDate() + 5)),
-      color: '#10b981',
-    },
-  ]
-
-  const usageCode = `import { FullCalendar } from "@/components/blocks/full-calendar";
-import { CalendarEvent } from "@/components/blocks/full-calendar/types";
-
-const events: CalendarEvent[] = [
-  {
-    id: "1",
-    title: "Team Meeting",
-    start: new Date(),
-    end: new Date(),
-    color: "#3b82f6",
-  },
-];
+  const usageCode = `import { FullCalendarRoot } from "@/components/blocks/full-calendar/full-calendar"
+import { mockEvents } from "@/lib/mocks/full-calendar-mock-event"
 
 export default function Page() {
   return (
-    <div className="h-[600px]">
-      <FullCalendar events={events} />
+    <div className="h-[700px]">
+      <FullCalendarRoot events={mockEvents} />
     </div>
-  );
+  )
 }`
 
   return (
@@ -64,294 +22,209 @@ export default function Page() {
           Full Calendar Block
         </h1>
         <p className='text-muted-foreground text-lg'>
-          A full-featured calendar component with month view, event management,
-          and responsive design. Designed to look like a Shadcn UI block.
+          A robust, customizable calendar component built on top of{' '}
+          <code className='text-primary'>@fullcalendar/react</code>. Features a
+          custom toolbar, Neo-Brutalist design elements, and responsive views.
         </p>
       </div>
 
       <ComponentPreview
-        title='Interactive Month View'
+        title='Interactive Calendar'
         component={
-          <div className='h-[700px] w-full border rounded-xl overflow-hidden shadow-sm'>
-            <FullCalendar events={events} />
+          <div className='h-[750px] w-full border rounded-xl overflow-hidden shadow-sm bg-background'>
+            <FullCalendarRoot events={mockEvents} />
           </div>
         }
         tsCode={usageCode}
       />
 
-      {/* Introduction to the feature directory structure if needed */}
       <div className='prose dark:prose-invert max-w-none'>
+        <h3>Installation</h3>
+        <p>First, install the required dependencies:</p>
+        <CodeBlock
+          code={`npm install @fullcalendar/react @fullcalendar/daygrid @fullcalendar/timegrid @fullcalendar/interaction @fullcalendar/core date-fns lucide-react motion`}
+          language='bash'
+        />
+
         <h3>Block Implementation</h3>
         <p>
-          The calendar block is composed of several files. Copy the code below
-          into your project.
+          This block is composed of multiple files for modularity. Copy the
+          structure below into your project.
         </p>
 
         <h4 className='mt-8'>File Structure</h4>
         <div className='rounded-md bg-muted p-4 font-mono text-sm'>
           src/components/blocks/full-calendar/
           <br />
-          ├── components/
+          ├── toolbar/
           <br />
-          │ ├── calendar-grid.tsx
+          │ ├── full-calendar-date-action.tsx
           <br />
-          │ └── calendar-header.tsx
+          │ ├── full-calendar-toolbar-action.tsx
           <br />
-          ├── full-calendar.tsx
+          │ ├── full-calendar-toolbar-view-mode.tsx
           <br />
-          └── types.ts
+          │ └── full-calendar-toolbar.tsx
+          <br />
+          ├── calendar-event-content.tsx
+          <br />
+          ├── full-calendar-provider.tsx
+          <br />
+          ├── full-calendar-type.ts
+          <br />
+          └── full-calendar.tsx
         </div>
-
-        <h4 className='mt-8'>types.ts</h4>
-        <CodeBlock
-          code={`export type CalendarEvent = {
-  id: string;
-  title: string;
-  start: Date;
-  end: Date;
-  color?: string; // Optional color for the event
-  description?: string;
-};
-
-export type CalendarViewType = 'month' | 'week' | 'day';`}
-          language='typescript'
-        />
-
-        <h4 className='mt-8'>components/calendar-header.tsx</h4>
-        <CodeBlock
-          code={`import { Button } from "@/components/ui/button";
-import { format } from "date-fns";
-import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
-
-interface CalendarHeaderProps {
-  currentDate: Date;
-  onPrevMonth: () => void;
-  onNextMonth: () => void;
-  onToday: () => void;
-  onAddEvent?: () => void;
-}
-
-export function CalendarHeader({
-  currentDate,
-  onPrevMonth,
-  onNextMonth,
-  onToday,
-  onAddEvent,
-}: CalendarHeaderProps) {
-  return (
-    <div className="flex items-center justify-between py-4">
-      <div className="flex items-center gap-4">
-        <h2 className="text-2xl font-bold tracking-tight">
-          {format(currentDate, "MMMM yyyy")}
-        </h2>
-        <div className="flex items-center rounded-md border bg-background shadow-sm">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8 rounded-l-md rounded-r-none border-r"
-            onClick={onPrevMonth}
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="ghost"
-            className="h-8 rounded-none px-3 font-normal"
-            onClick={onToday}
-          >
-            Today
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8 rounded-l-none rounded-r-md border-l"
-            onClick={onNextMonth}
-          >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
-      <div className="flex items-center gap-2">
-        {onAddEvent && (
-          <Button onClick={onAddEvent} size="sm" className="h-9">
-            <Plus className="mr-2 h-4 w-4" />
-            New Event
-          </Button>
-        )}
-      </div>
-    </div>
-  );
-}`}
-          language='tsx'
-        />
-
-        <h4 className='mt-8'>components/calendar-grid.tsx</h4>
-        <CodeBlock
-          code={`import { cn } from "@/lib/utils";
-import {
-  eachDayOfInterval,
-  endOfMonth,
-  endOfWeek,
-  format,
-  isSameDay,
-  isSameMonth,
-  isToday,
-  startOfMonth,
-  startOfWeek,
-} from "date-fns";
-import { CalendarEvent } from "../types";
-
-interface CalendarGridProps {
-  currentDate: Date;
-  events: CalendarEvent[];
-  onDateClick?: (date: Date) => void;
-  onEventClick?: (event: CalendarEvent) => void;
-}
-
-export function CalendarGrid({
-  currentDate,
-  events,
-  onDateClick,
-  onEventClick,
-}: CalendarGridProps) {
-  const monthStart = startOfMonth(currentDate);
-  const monthEnd = endOfMonth(monthStart);
-  const startDate = startOfWeek(monthStart);
-  const endDate = endOfWeek(monthEnd);
-
-  const days = eachDayOfInterval({
-    start: startDate,
-    end: endDate,
-  });
-
-  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-  return (
-    <div className="flex flex-col border rounded-lg overflow-hidden shadow-sm bg-background">
-      <div className="grid grid-cols-7 border-b bg-muted/40 text-center text-sm font-medium text-muted-foreground">
-        {weekDays.map((day) => (
-          <div key={day} className="py-2.5">
-            {day}
-          </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-7 auto-rows-fr bg-muted/20">
-        {days.map((day, dayIdx) => {
-          const dayEvents = events.filter((event) => isSameDay(event.start, day));
-          const isCurrentMonth = isSameMonth(day, monthStart);
-
-          return (
-            <div
-              key={day.toString()}
-              onClick={() => onDateClick?.(day)}
-              className={cn(
-                "min-h-[120px] p-2 border-b border-r bg-background transition-colors hover:bg-muted/10 cursor-pointer flex flex-col gap-1 relative group",
-                !isCurrentMonth && "bg-muted/5 text-muted-foreground",
-                (dayIdx + 1) % 7 === 0 && "border-r-0",
-              )}
-            >
-              <div className="flex items-center justify-between">
-                <span
-                  className={cn(
-                    "text-sm font-medium w-7 h-7 flex items-center justify-center rounded-full",
-                    isToday(day)
-                      ? "bg-primary text-primary-foreground"
-                      : "text-foreground",
-                    !isCurrentMonth && "text-muted-foreground/50",
-                  )}
-                >
-                  {format(day, "d")}
-                </span>
-              </div>
-
-              <div className="flex flex-col gap-1 mt-1 overflow-y-auto max-h-[100px] scrollbar-hide">
-                {dayEvents.map((event) => (
-                  <div
-                    key={event.id}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onEventClick?.(event);
-                    }}
-                    className={cn(
-                      "px-2 py-1 text-xs rounded-md truncate font-medium border shadow-sm transition-all hover:opacity-80",
-                      event.color ? "" : "bg-primary/10 text-primary border-primary/20",
-                    )}
-                    style={event.color ? { backgroundColor: \`\${event.color}20\`, color: event.color, borderColor: \`\${event.color}40\` } : {}}
-                  >
-                    {event.title}
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}`}
-          language='tsx'
-        />
 
         <h4 className='mt-8'>full-calendar.tsx</h4>
+        <p className='text-sm text-muted-foreground mb-2'>
+          The main entry component that initializes the FullCalendar instance
+          and provider.
+        </p>
         <CodeBlock
-          code={`"use client";
+          code={`"use client"
 
-import { addMonths, subMonths } from "date-fns";
-import * as React from "react";
-import { CalendarGrid } from "./components/calendar-grid";
-import { CalendarHeader } from "./components/calendar-header";
-import { CalendarEvent } from "./types";
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import { FullCalendarApiProvider } from './full-calendar-provider'
+import { FullCalendarToolbar } from './toolbar/full-calendar-toolbar'
+import { useState } from 'react'
+import { CalendarEventContent } from './calendar-event-content'
+import type { ViewMode } from './full-calendar-type'
+import { CalendarApi } from '@fullcalendar/core/index.js'
+import type { CalendarEvent } from '@/lib/mocks/full-calendar-mock-event'
 
-interface FullCalendarProps {
-  events?: CalendarEvent[];
-  initialDate?: Date;
+interface FullCalendarRootProps {
+  initialViewMode?: ViewMode
+  events?: CalendarEvent[]
 }
 
-export function FullCalendar({
-  events: initialEvents = [],
-  initialDate = new Date()
-}: FullCalendarProps) {
-  const [currentDate, setCurrentDate] = React.useState(initialDate);
-  const [events, setEvents] = React.useState<CalendarEvent[]>(initialEvents);
-
-  const handlePrevMonth = () => setCurrentDate(subMonths(currentDate, 1));
-  const handleNextMonth = () => setCurrentDate(addMonths(currentDate, 1));
-  const handleToday = () => setCurrentDate(new Date());
-
-  const handleDateClick = (date: Date) => {
-    // Implement event creation logic here
-  };
-
-  const handleEventClick = (event: CalendarEvent) => {
-    // Implement event preview logic here
-    alert(\`Event: \${event.title}\`);
-  };
-
-  const handleAddEvent = () => {
-    // Implement add event modal opening here
-  };
-
+export function FullCalendarRoot({
+  events = [],
+  initialViewMode = 'dayGridMonth',
+}: FullCalendarRootProps) {
+  const [calendarApi, setCalendarApi] = useState<CalendarApi | null>(null)
   return (
-    <div className="flex flex-col h-full w-full bg-background p-6">
-      <CalendarHeader
-        currentDate={currentDate}
-        onPrevMonth={handlePrevMonth}
-        onNextMonth={handleNextMonth}
-        onToday={handleToday}
-        onAddEvent={handleAddEvent}
-      />
-      <div className="flex-1">
-        <CalendarGrid
-          currentDate={currentDate}
+    <FullCalendarApiProvider calendarApi={calendarApi}>
+      <div className='flex flex-col gap-4 calendar-wrapper'>
+        <FullCalendarToolbar />
+        <FullCalendar
+          ref={(instance) => {
+            if (instance && !calendarApi) {
+              setCalendarApi(instance.getApi())
+            }
+          }}
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView={initialViewMode}
+          headerToolbar={false}
           events={events}
-          onDateClick={handleDateClick}
-          onEventClick={handleEventClick}
+          droppable
+          editable
+          eventContent={CalendarEventContent}
+          eventDisplay="block"
         />
       </div>
-    </div>
-  );
+    </FullCalendarApiProvider>
+  )
 }`}
           language='tsx'
+        />
+
+        <h4 className='mt-8'>full-calendar-provider.tsx</h4>
+        <p className='text-sm text-muted-foreground mb-2'>
+          Context provider to share the Calendar API instance across child
+          components.
+        </p>
+        <CodeBlock
+          code={`"use client"
+
+import { CalendarApi } from '@fullcalendar/core/index.js'
+import { createContext, useContext } from 'react'
+
+interface FullCalendarApiContextValue {
+  calendarApi: CalendarApi | null
+}
+
+export const FullCalendarApiContext = createContext<FullCalendarApiContextValue | null>(
+  {} as FullCalendarApiContextValue
+)
+
+export function FullCalendarApiProvider({
+  children,
+  calendarApi,
+}: {
+  children: React.ReactNode
+  calendarApi: CalendarApi | null
+}) {
+  return (
+    <FullCalendarApiContext.Provider value={{ calendarApi }}>
+      {children}
+    </FullCalendarApiContext.Provider>
+  )
+}
+
+export function useFullCalendarApi() {
+  const context = useContext(FullCalendarApiContext)
+
+  if (context === null) {
+    throw new Error(
+      'useFullCalendarApi must be used within a FullCalendarApiProvider'
+    )
+  }
+
+  return context
+}`}
+          language='tsx'
+        />
+
+        <h4 className='mt-8'>calendar-event-content.tsx</h4>
+        <p className='text-sm text-muted-foreground mb-2'>
+          Custom event rendering component with status indicators and styling.
+        </p>
+        <CodeBlock
+          code={`import type { EventContentArg } from '@fullcalendar/core'
+import { cn } from '@/lib/utils'
+import Image from 'next/image'
+import type { CalendarEvent } from '@/lib/mocks/full-calendar-mock-event'
+import { CheckCircle2, Clock, Circle } from 'lucide-react'
+
+// ... (Copy the full content of your calendar-event-content.tsx here)
+// For brevity in docs, you can show the structure, but ideally include the full code.
+`}
+          language='tsx'
+        />
+
+        <h4 className='mt-8'>toolbar/full-calendar-date-action.tsx</h4>
+        <p className='text-sm text-muted-foreground mb-2'>
+          Displays the current date and provides navigation controls.
+        </p>
+        <CodeBlock
+          code={`"use client"
+import { format } from "date-fns"
+import { useFullCalendarApi } from "../full-calendar-provider"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
+// ... imports
+
+export function FullCalendarDateAction() {
+  const { calendarApi } = useFullCalendarApi()
+  // ... implementation details
+  // (Include the logic for syncing date and events count)
+  return (
+    // ... JSX
+  )
+}`}
+          language='tsx'
+        />
+
+        <h4 className='mt-8'>full-calendar-type.ts</h4>
+        <CodeBlock
+          code={`export type ViewMode = 'dayGridMonth' | 'timeGridWeek' | 'timeGridDay'`}
+          language='typescript'
         />
       </div>
     </div>
