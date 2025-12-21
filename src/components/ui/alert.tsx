@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const alertVariants = cva(
-  'relative w-full rounded-lg border-2 border-border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current shadow-[4px_4px_0px_0px_var(--color-border)]',
+  'relative w-full rounded-lg px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current',
   {
     variants: {
       variant: {
@@ -12,9 +12,15 @@ const alertVariants = cva(
         destructive:
           'text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90',
       },
+      shape: {
+        default:
+          'border-2 border-border shadow-[4px_4px_0px_0px_var(--color-border)]',
+        unstyled: 'border border-border',
+      },
     },
     defaultVariants: {
       variant: 'default',
+      shape: 'default',
     },
   },
 )
@@ -28,7 +34,7 @@ function Alert({
     <div
       data-slot='alert'
       role='alert'
-      className={cn(alertVariants({ variant }), className)}
+      className={cn(alertVariants({ variant, shape: props.shape }), className)}
       {...props}
     />
   )

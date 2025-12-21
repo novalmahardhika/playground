@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-bold transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border-2 border-border shadow-[4px_4px_0px_0px_var(--color-border)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-bold transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -18,6 +18,7 @@ const buttonVariants = cva(
         ghost:
           'border-transparent shadow-none hover:bg-accent hover:text-accent-foreground active:translate-x-0 active:translate-y-0',
         link: 'text-primary underline-offset-4 hover:underline border-none shadow-none active:translate-x-0 active:translate-y-0',
+        unstyled: 'border-none shadow-none',
       },
       size: {
         default: 'h-10 px-4 py-2 has-[>svg]:px-3',
@@ -27,11 +28,25 @@ const buttonVariants = cva(
         'icon-sm': 'size-9',
         'icon-lg': 'size-11',
       },
+      shape: {
+        default:
+          'border-2 border-border shadow-[4px_4px_0px_0px_var(--color-border)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none',
+        unstyled: '',
+      },
     },
     defaultVariants: {
       variant: 'default',
       size: 'default',
+      shape: 'default',
     },
+    compoundVariants: [
+      {
+        variant: 'outline',
+        shape: 'unstyled',
+        class:
+          'border border-input shadow-sm hover:bg-accent hover:text-accent-foreground',
+      },
+    ],
   },
 )
 
@@ -50,7 +65,9 @@ function Button({
   return (
     <Comp
       data-slot='button'
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(
+        buttonVariants({ variant, size, shape: props.shape, className }),
+      )}
       {...props}
     />
   )
